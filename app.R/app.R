@@ -1,15 +1,21 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+
 
 library(shiny)
+library(tidyverse)
+library(googlesheets4)
 
-# Define UI for application that draws a histogram
+df <- read_sheet("https://docs.google.com/spreadsheets/d/1bV5oIjOFwZYxEFU9NvOksjaCMsO1-4OXFUBMSmKrah4/edit#gid=0",
+                 col_types = "icDiii") |> 
+  drop_na() |> 
+  mutate(volume = repetitions*weight)
+  
+
+
+
+
+
+
+# Define UI for application
 ui <- fluidPage(
 
     # Application title
@@ -35,16 +41,17 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
-             xlab = 'Waiting time to next eruption (in mins)',
-             main = 'Histogram of waiting times')
-    })
+  
+  # ggplot(df |> 
+  #            drop_na() |>  
+  #            mutate(volume = repetitions*weight) |>  
+  #            ggplot(aes(x = date, y = volume, color = technique)) +
+  #            geom_point() +
+  #            geom_line() +
+  #            theme_bw() +
+  #            facet_wrap(~ set))
+  
+    
 }
 
 # Run the application 
