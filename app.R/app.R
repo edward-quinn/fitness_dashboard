@@ -44,6 +44,7 @@ server <- function(input, output) {
     ggplot(selected(),
                         aes(x = date, y = volume, color = technique)) +
     geom_point() +
+    theme_bw() +
     geom_line() +
     facet_wrap(~ set)
   )
