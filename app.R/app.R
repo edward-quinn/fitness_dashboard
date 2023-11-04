@@ -42,7 +42,7 @@ server <- function(input, output) {
   output$plot <- renderPlot(
     
     ggplot(selected(),
-                        aes(x = date, y = volume, color = technique)) +
+                        aes(x = date, y = weight, color = technique)) +
     geom_point() +
     theme_bw() +
     geom_line() +
